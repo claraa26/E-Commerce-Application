@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -78,7 +79,8 @@ public class OrderServiceImpl implements OrderService {
 			throw new APIException("Only bank transfer payment is accepted.");
 		}
 
-		Bank bank = bankRepo.findByBankNameIgnoreCase(bankName).orElseThrow(() -> new APIException("Bank not found: " + bankName));
+		Bank bank = Optional.ofNullable(bankRepo.findByBankName(bankName))
+        .orElseThrow(() -> new APIException("Bank not found: " + bankName));
 
 
 		Cart cart = cartRepo.findCartByEmailAndCartId(email, cartId);
