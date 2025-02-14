@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -30,5 +32,9 @@ public class Payment {
 	@NotBlank
 	@Size(min = 4, message = "Payment method must contain atleast 4 characters")
 	private String paymentMethod;
+
+	@ManyToOne
+    @JoinColumn(name = "bank_id", nullable = false)
+    private Bank bank;
 
 }

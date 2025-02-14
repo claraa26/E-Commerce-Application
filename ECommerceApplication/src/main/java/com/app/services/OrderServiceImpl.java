@@ -100,7 +100,7 @@ public class OrderServiceImpl implements OrderService {
 		Payment payment = new Payment();
 		payment.setOrder(order);
 		payment.setPaymentMethod(paymentMethod);
-		// payment.setBank(bank);
+		payment.setBank(bank);
 
 		payment = paymentRepo.save(payment);
 
